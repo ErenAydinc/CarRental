@@ -21,7 +21,7 @@ namespace ConsoleUI
             //    carManager.Delete(cars);
             //}
 
-             //carManager.Add(new Car {BrandId=2,Description="Mercedes",DailyPrice=2000,ColorId=2,ModelYear="2016" });
+             ///carManager.Add(new Car {BrandId=2,Description="Mercedes",DailyPrice=2000,ColorId=2,ModelYear="2016" });
             // colorManager.Add(new Color { ColorName = "Kırmızı",ColorId=1});
             // brandManager.Add(new Brand { BrandId = 1, BrandName = "Mercedes" });
 
