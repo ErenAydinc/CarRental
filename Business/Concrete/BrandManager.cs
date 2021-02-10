@@ -44,12 +44,12 @@ namespace Business.Concrete
             _brandDal.Delete(brand);
         }
 
-        List<Color> IBrandService.GetCarsByBrandId(int Id)
+        List<Brand> IBrandService.GetCarsByBrandId(int Id)
         {
             throw new NotImplementedException();
         }
 
-        List<Color> IBrandService.GetCarsByColorId(int Id)
+        List<Brand> IBrandService.GetCarsByColorId(int Id)
         {
             throw new NotImplementedException();
         }

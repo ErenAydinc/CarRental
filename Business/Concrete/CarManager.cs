@@ -53,6 +53,11 @@ namespace Business.Concrete
             return _carDal.GetAll(c => c.ColorId == Id);
         }
 
+        public List<Car> GetCarsById(int Id)
+        {
+            return _carDal.GetAll(c => c.Id == Id);
+        }
+
         public void Update(Car car)
         {
             _carDal.Update(car);
