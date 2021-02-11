@@ -15,18 +15,23 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
-            //foreach (var cars in carManager.GetAll())
-            //{
-            //    Console.WriteLine(cars.DailyPrice + ":" + cars.Description);
-            //    carManager.Delete(cars);
-            //}
+            Console.WriteLine("           |Arabanın Markası|          "+"       |Günlük Kiralama Bedeli|       "+"        |Kiralanan Arabanın Modeli|      ");
+            foreach (var car in carManager.GetAll().Data)
+            {
+                Console.WriteLine("                 " +car.Description+"       "+"                    "+car.DailyPrice+"                          "+"      "+car.ModelYear );
+            }
 
-              carManager.Add(new Car { BrandId = 2, Description = "BMW 320i", DailyPrice = 2000, ColorId = 2, ModelYear = "2018" });
-            colorManager.Add(new Color { ColorName = "Kırmızı",ColorId=1});
-            brandManager.Add(new Brand { BrandId = 1, BrandName = "Renault" });
 
-           // carManager.Delete(new Car { Id });
-            
+
+            //carManager.Add(new Car { BrandId = 2, Description = "BMW 320i", DailyPrice = 2000, ColorId = 2, ModelYear = "2018" });
+            //colorManager.Add(new Color { ColorName = "Kırmızı", ColorId = 1 });
+            //brandManager.Add(new Brand { BrandId = 1, BrandName = "Renault" });
+
+
+
+
+            // carManager.Delete(new Car { Id });
+
 
 
         }
