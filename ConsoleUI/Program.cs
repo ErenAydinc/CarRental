@@ -55,7 +55,7 @@ namespace ConsoleUI
 
 
             //Kiralama İşlemleri
-            //RentalManager();
+            RentalManager();
 
         }
 
@@ -64,9 +64,9 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             foreach (var rent in rentalManager.GetAll().Data)
             {
-                Console.WriteLine(rent.CarId + "  " + rent.CustomerId + "   " + rent.RentDate + "  " + rent.ReturnDate);
+                Console.WriteLine(rent.CustomerId + "   " + rent.RentDate + "  " + rent.ReturnDate);
             }
-            rentalManager.Add(new Rental { CustomerId = 1, RentDate = new DateTime(2020, 06, 3), ReturnDate = new DateTime(2020, 06, 08) });
+            //rentalManager.Add(new Rental { CustomerId = 1, RentDate = DateTime.Now, ReturnDate =new DateTime(2020,02,13) });
         }
 
         /// <summary>
