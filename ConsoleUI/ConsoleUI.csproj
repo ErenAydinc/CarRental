@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MyFinalProject\Core\Core.csproj" />
     <ProjectReference Include="..\Business\Business.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DateAccess\DateAccess.csproj" />
   </ItemGroup>
 
