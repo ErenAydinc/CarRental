@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DateAccess.Concrete.EntityFramework
 {
-    public class EfUserDal:EfEntitiyRepositoryBase<User,CarRentalContext>,IUserDal
+    public class EfUserDal:EfEntityRepositoryBase<User,CarRentalContext>,IUserDal
     {
     }
 }

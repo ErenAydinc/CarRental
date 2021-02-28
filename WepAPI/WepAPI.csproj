@@ -14,7 +14,12 @@
     <ProjectReference Include="..\Business\Business.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DateAccess\DateAccess.csproj" />
-    <ProjectReference Include="..\Entites\Entites.csproj" />
+    <ProjectReference Include="..\Entites\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 

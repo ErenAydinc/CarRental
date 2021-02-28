@@ -43,5 +43,15 @@ namespace Business.Constants
         public static string CustomerAdded = "Müşteri Eklendi";
         public static string CustomerDeleted = "Müşteri Silindi";
         public static string CustomerUpdated = "Müşteri Güncellendi";
+
+        //Image
+        public static string DeleteMessage = "Resim Başarıyla Silindi";
+        public static string AddMessage = "Resim Eklendi";
+        public static string UpdateMessage = "Resim Değiştirildi";
+
+        //Image limited
+        public static string ImageLimited = "5 fotoğraftan fazla yüklenemz";
+
+        public static string CarImageLimitExceeded = "Limit Aşıldı";
     }
 }

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace DateAccess.Concrete.EntityFramework
 {
-    public class EfRentalDal : EfEntitiyRepositoryBase<Rental, CarRentalContext>, IRentalDal
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, CarRentalContext>, IRentalDal
     {
         public List<RentalDetailDto> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
         {

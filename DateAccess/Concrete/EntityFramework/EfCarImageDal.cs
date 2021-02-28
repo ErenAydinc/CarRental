@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DateAccess.Concrete.EntityFramework
 {
-    public class EfCustomerDal:EfEntityRepositoryBase<Customer,CarRentalContext>,ICustomerDal
+    public class EfCarImageDal:EfEntityRepositoryBase<CarImage,CarRentalContext>,ICarImageDal
     {
     }
 }

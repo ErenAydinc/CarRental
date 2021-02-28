@@ -11,7 +11,7 @@ using System.Text;
 
 namespace DateAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : EfEntitiyRepositoryBase<Car, CarRentalContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalContext>, ICarDal
     {
 
         public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
