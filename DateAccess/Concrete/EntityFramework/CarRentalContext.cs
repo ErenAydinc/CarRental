@@ -1,4 +1,6 @@
-﻿using Entites.Concrete;
+﻿using Core.Entites.Concrete;
+using Core.Entities.Concrete;
+using Entites.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,5 +21,7 @@ namespace DateAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     }
 }

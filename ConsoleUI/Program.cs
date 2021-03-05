@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entites.Concrete;
 using DateAccess.Concrete;
 using DateAccess.Concrete.EntityFramework;
 using Entites.Concrete;
@@ -80,7 +81,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(user.FirstName + "     " + user.LastName + "      " + user.Email);
             }
-            userManager.Add(new User { Email = "erenaydinc@gmail.com", FirstName = "Eren", LastName = "Aydinç", Password = "Erenss4545" });
+            userManager.Add(new User { Email = "erenaydinc@gmail.com", FirstName = "Eren", LastName = "Aydinç"});
         }
 
         /// <summary>

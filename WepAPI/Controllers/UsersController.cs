@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
+using Core.Entites.Concrete;
 using Entites.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +22,7 @@ namespace WepAPI.Controllers
         }
 
         [HttpGet("getall")]
+        [Authorize(Roles ="user.list")]
         public IActionResult GetAll()
         {
             var result = _userService.GetAll();
