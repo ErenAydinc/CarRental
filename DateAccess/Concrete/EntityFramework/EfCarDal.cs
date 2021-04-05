@@ -1,7 +1,7 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DateAccess.Abstract;
-using Entites.Concrete;
-using Entites.DTOs;
+using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,25 +14,26 @@ namespace DateAccess.Concrete.EntityFramework
     public class EfCarDal : EfEntityRepositoryBase<Car, CarRentalContext>, ICarDal
     {
 
-        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
+        public List<CarDetailDto> GetCarDetails()
         {
             using (CarRentalContext context = new CarRentalContext())
             {
-                var result = from ca in filter is null ? context.Cars : context.Cars.Where(filter)
+                var result = from ca in context.Cars
                              join co in context.Colors
-                             on ca.ColorId equals co.ColorId
+                             on ca.ColorId equals co.Id
                              join b in context.Brands
-                             on ca.BrandId equals b.BrandId
+                             on ca.BrandId equals b.Id
                              select new CarDetailDto
                              {
                                  Id = ca.Id,
-                                 BrandId = b.BrandId,
+                                 BrandId = b.Id,
                                  BrandName = b.BrandName,
-                                 ColorId = co.ColorId,
+                                 ColorId = co.Id,
                                  ColorName = co.ColorName,
                                  DailyPrice = ca.DailyPrice,
                                  Description = ca.Description,
-                                 ModelYear = ca.ModelYear
+                                 ModelYear = ca.ModelYear,
+                                 ImagePath = (from a in context.CarImages where a.CarId == ca.Id select a.ImagePath).FirstOrDefault()
                              };
 
                 return result.ToList();

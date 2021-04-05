@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using Entites.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,9 +43,9 @@ namespace WepAPI.Controllers
         }
 
         [HttpGet("getcarsbybrandid")]
-        public IActionResult GetCarsByBrandId(int Id)
+        public IActionResult GetCarsByBrandIdDetail(int brandId)
         {
-            var result = _carService.GetCarsByBrandId(Id);
+            var result = _carService.GetCarsByBrandIdDetail(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,9 +54,9 @@ namespace WepAPI.Controllers
         }
 
         [HttpGet("getcarsbycolorid")]
-        public IActionResult GetCarsByColorId(int Id)
+        public IActionResult GetCarsByColorIdDetail(int colorId)
         {
-            var result = _carService.GetCarsByColorId(Id);
+            var result = _carService.GetCarsByColorIdDetail(colorId);
             if (result.Success)
             {
                 return Ok(result);
@@ -97,10 +97,28 @@ namespace WepAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("details")]
+        public IActionResult GetCarDetails()
+        {
+            
+            var result = _carService.GetCarDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
-
-
-
+        [HttpGet("getcarsbybrandidandcolorid")]
+        public IActionResult GetCarsByBrandIdAndColorId(int brandId,int colorId)
+        {
+            var result = _carService.GetCarsByBrandIdAndColorId(brandId,colorId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
 
     }

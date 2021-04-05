@@ -1,10 +1,11 @@
 ﻿using Business.Abstract;
-using Entites.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WepAPI.Controllers
@@ -22,7 +23,20 @@ namespace WepAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
+
             var result = _brandService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int id)
+        {
+
+            var result = _brandService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);

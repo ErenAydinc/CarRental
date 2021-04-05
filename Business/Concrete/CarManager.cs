@@ -5,9 +5,12 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DateAccess.Abstract;
 using DateAccess.Concrete;
-using Entites.Concrete;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
@@ -41,14 +44,28 @@ namespace Business.Concrete
         }
 
         
-        public IDataResult<List<Car>> GetAll()
+        public IDataResult<List<CarDetailDto>> GetAll()
         {
-            return new SuccessDataResult<List<Car>> (_carDal.GetAll());
+            return new SuccessDataResult<List<CarDetailDto>> (_carDal.GetCarDetails());
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int Id)
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == Id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandIdDetail(int brandId)
+        {
+             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(x => x.BrandId == brandId).ToList());
+        }
+        public IDataResult<List<CarDetailDto>> GetCarsByColorIdDetail(int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(x => x.ColorId == colorId).ToList());
+        }
+
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId));
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int Id)
@@ -65,6 +82,11 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandIdAndColorId(int brandId, int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().Where(x=>x.BrandId==brandId && x.ColorId==colorId).ToList());
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DateAccess.Abstract;
-using Entites.Concrete;
-using Entites.DTOs;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,28 +12,30 @@ namespace DateAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, CarRentalContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        public List<RentalDetailDto> GetRentalDetails()
         {
             using (CarRentalContext context=new CarRentalContext())
             {
-                var result = from re in filter is null
-                             ? context.Rentals : context.Rentals.Where(filter)
-                             join c in context.Cars
-                             on re.CarId equals c.Id
-                             join cu in context.Customers
-                             on re.CustomerId equals cu.Id
-                             join us in context.Users
-                             on cu.UserId equals us.Id
+                var result = from rental in context.Rentals
+                             join car in context.Cars
+                             on rental.CarId equals car.Id
+                             join customer in context.Customers
+                             on rental.CustomerId equals customer.Id
+                             join user in context.Users
+                             on customer.UserId equals user.Id
+                             join brand in context.Brands
+                             on car.BrandId equals brand.Id
                              select new RentalDetailDto
                              {
-                                 Id = re.Id,
-                                 CarId = c.Id,
-                                 CompanyName = cu.CompanyName,
-                                 RentDate = re.RentDate,
-                                 ReturnDate = re.ReturnDate,
-                                 FirstName=us.FirstName,
-                                 LastName=us.LastName
+                                 CustomerId=customer.Id,
+                                 CarId=rental.Id,
+                                 RentDate=rental.RentDate,
+                                 ReturnDate=rental.ReturnDate,
+                                 BrandName = brand.BrandName,
+                                 CustomerName = user.FirstName + " " + user.LastName,
+                                 CompanyName=customer.CompanyName
                              };
+
                 return result.ToList();
             }
         }

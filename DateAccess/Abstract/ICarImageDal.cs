@@ -1,7 +1,9 @@
 ﻿using Core.DataAccess;
-using Entites.Concrete;
+using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DateAccess.Abstract
@@ -9,5 +11,7 @@ namespace DateAccess.Abstract
     public interface ICarImageDal:IEntityRepository<CarImage>
     {
 
+        List<CarImageDto> GetCarImageDetails();
+        bool IsExist(int id);
     }
 }

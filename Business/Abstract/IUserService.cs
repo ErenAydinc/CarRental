@@ -1,7 +1,7 @@
 ﻿using Core.Entites.Concrete;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using Entites.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +16,6 @@ namespace Business.Abstract
         IResult Delete(User user);
         IResult Update(User user);
         IDataResult<List<User>> GetAll();
-        IDataResult<User> GetById(int userId);
+        IDataResult<User> GetById(int id);
     }
 }

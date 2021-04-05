@@ -4,7 +4,7 @@ using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DateAccess.Abstract;
-using Entites.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +14,6 @@ namespace Business.Concrete
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
-        private int hour = 03;
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
@@ -36,6 +35,11 @@ namespace Business.Concrete
         {
             
             return new SuccessDataResult<List<Brand>> (_brandDal.GetAll());
+        }
+
+        public IDataResult<List<Brand>> GetById(int id)
+        {
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b=>b.Id==id));
         }
 
         public IResult Update(Brand brand)

@@ -2,7 +2,7 @@
 using Core.Entites.Concrete;
 using DateAccess.Concrete;
 using DateAccess.Concrete.EntityFramework;
-using Entites.Concrete;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 
@@ -91,7 +91,7 @@ namespace ConsoleUI
         private static void ColorManager()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Add(new Color { ColorName = "Kırmızı", ColorId = 1 });
+            colorManager.Add(new Color { ColorName = "Kırmızı" });
         }
         
         /// <summary>
@@ -101,7 +101,7 @@ namespace ConsoleUI
         private static void BrandManager()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Add(new Brand { BrandId = 1, BrandName = "Renault" });
+            brandManager.Add(new Brand { BrandName = "Renault" });
         }
 
         /// <summary>

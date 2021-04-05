@@ -1,7 +1,5 @@
 ﻿using Business.Abstract;
-using Core.Entites.Concrete;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,58 +11,53 @@ namespace WepAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class PaymentsController : ControllerBase
     {
-        IUserService _userService;
-        public UsersController(IUserService userService)
+        IPaymentService _paymentService;
+
+        public PaymentsController(IPaymentService paymentService)
         {
-            _userService = userService;
+            _paymentService = paymentService;
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Payment payment)
+        {
+            var result = _paymentService.Add(payment);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _userService.GetAll();
+
+            var result = _paymentService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int userId)
-        {
-            var result = _userService.GetById(userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("add")]
-        public IActionResult Add(User user)
-        {
-            var result = _userService.Add(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+
         [HttpPost("delete")]
-        public IActionResult Delete(User user)
+        public IActionResult Delete(Payment payment)
         {
-            var result = _userService.Delete(user);
+            var result = _paymentService.Delete(payment);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
+
         [HttpPost("update")]
-        public IActionResult Update(User user)
+        public IActionResult Update(Payment payment)
         {
-            var result = _userService.Update(user);
+            var result = _paymentService.Update(payment);
             if (result.Success)
             {
                 return Ok(result);

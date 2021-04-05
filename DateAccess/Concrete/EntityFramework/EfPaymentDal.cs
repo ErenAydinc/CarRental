@@ -9,9 +9,9 @@ using System.Text;
 
 namespace DateAccess.Concrete.EntityFramework
 {
-    public class EfColorDal:IColorDal
+    public class EfPaymentDal : IPaymentDal
     {
-        public void Add(Color entity)
+        public void Add(Payment entity)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
@@ -21,7 +21,7 @@ namespace DateAccess.Concrete.EntityFramework
             }
         }
 
-        public void Delete(Color entity)
+        public void Delete(Payment entity)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
@@ -31,27 +31,27 @@ namespace DateAccess.Concrete.EntityFramework
             }
         }
 
-        public Color Get(Expression<Func<Color, bool>> filter)
+        public Payment Get(Expression<Func<Payment, bool>> filter)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
-                return context.Set<Color>().SingleOrDefault(filter);
+                return context.Set<Payment>().SingleOrDefault(filter);
             }
         }
 
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
+        public List<Payment> GetAll(Expression<Func<Payment, bool>> filter = null)
         {
             using (CarRentalContext context = new CarRentalContext())
             {
                 return filter == null
-                    ? context.Set<Color>().ToList()
-                    : context.Set<Color>().Where(filter).ToList();
+                    ? context.Set<Payment>().ToList()
+                    : context.Set<Payment>().Where(filter).ToList();
             }
         }
 
-        public void Update(Color entity)
+        public void Update(Payment entity)
         {
-            using(CarRentalContext context = new CarRentalContext())
+            using (CarRentalContext context = new CarRentalContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;

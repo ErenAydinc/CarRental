@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utilities.Results;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,72 +9,51 @@ namespace Core.Utilities.Helpers
 {
     public class FileHelper
     {
+        static string directory = Directory.GetCurrentDirectory() + @"\wwwroot\";
+        static string path = @"Images\";
         public static string Add(IFormFile file)
         {
+
+
             string extension = Path.GetExtension(file.FileName).ToUpper();
-            string newGUID = CreateGuid() + extension;
-            var directory = Directory.GetCurrentDirectory() + "\\wwwroot";
-            var path = directory + @"\Images";
-            if (!Directory.Exists(path))
+            string newFileName = Guid.NewGuid().ToString("N") + extension;
+            if (!Directory.Exists(directory + path))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(directory + path);
             }
-            string imagePath;
-            using (FileStream fileStream = File.Create(path + "\\" + newGUID))
+            using (FileStream fileStream = File.Create(directory + path + newFileName))
             {
-                file.CopyToAsync(fileStream);
-                imagePath = path + "\\" + newGUID;
-                var randomName = Guid.NewGuid().ToString();
+                file.CopyTo(fileStream);
                 fileStream.Flush();
             }
-            return imagePath.Replace("\\", "/");
-
-            //var sourcepath = newPath(file);
-
-            //if (file.Length > 0)
-            //{
-            //    using (var stream = new FileStream(sourcepath, FileMode.Create))
-            //    {
-            //        file.CopyTo(stream);
-            //    }
-            //}
-            //var result = newPath(file);
-            //File.Move(sourcepath, result);
-            //return result;
+            return (path + newFileName).Replace("\\", "/");
         }
 
-        private static string CreateGuid()
+        public static string Update(IFormFile file, string OldImagePath)
         {
-            return Guid.NewGuid().ToString("N") + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Year;
+            Delete(OldImagePath);
+            return Add(file);
         }
 
-        public static void Delete(string path)
+        public static void Delete(string ImagePath)
         {
-            File.Delete(path);
-        }
-        public static string Update(string sourcePath, IFormFile file)
-        {
-            var result = newPath(file);
-            if (sourcePath.Length > 0)
+
+            if (File.Exists(directory + ImagePath.Replace("/", "\\")) && Path.GetFileName(ImagePath) != "default.png")
             {
-                using (var stream = new FileStream(result, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
+                File.Delete(directory + ImagePath.Replace("/", "\\"));
             }
-            File.Delete(sourcePath);
-            return result;
         }
-        public static string newPath(IFormFile file)
-        {
-            FileInfo ff = new FileInfo(file.FileName);
-            string fileExtension = ff.Extension;
 
-            string path = Environment.CurrentDirectory + @"\wwwroot\Images";
-            var newPath = Guid.NewGuid().ToString() + "-" + DateTime.Now.Month + "-" + DateTime.Now.Day + "-" + DateTime.Now.Year + fileExtension;
+        //public static string newPath(IFormFile file)
+        //{
+        //    FileInfo ff = new FileInfo(file.FileName);
+        //    string fileExtension = ff.Extension;
 
-            string result = $@"{path}\{newPath}";
-            return result;
-        }
+        //    string path = Environment.CurrentDirectory + @"\wwwroot\uploads";
+        //    var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+
+        //    string result = $@"{path}\{newPath}";
+        //    return result;
+        //}
     }
 }
