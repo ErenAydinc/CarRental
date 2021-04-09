@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Entites.Concrete;
 using Core.Utilities.Results;
 using DateAccess.Abstract;
 using DateAccess.Concrete;
@@ -30,6 +31,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CarDescriptionInvaild);
             }
+            
             _carDal.Add(car);
             return new SuccessResult(Messages.CarAdded);
 

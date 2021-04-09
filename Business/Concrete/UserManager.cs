@@ -22,42 +22,30 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(UserValidator))]
-        public IResult Add(User user)
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserAdded);
+            
         }
 
-        public IResult Delete(User user)
+        public User GetByMail(string email)
         {
-            _userDal.Delete(user);
-            return new SuccessResult(Messages.UserDeleted);
+            return _userDal.Get(x=>x.Email==email);
         }
 
-        public IDataResult<List<User>> GetAll()
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public IDataResult <List<User>> GetAll()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
 
-        public IDataResult<User> GetById(int id)
+        public IDataResult<List<User>> GetUsersById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
-        }
-
-        public IDataResult<User> GetByMail(string email)
-        {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
-        }
-
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
-        {
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
-        }
-
-        public IResult Update(User user)
-        {
-            _userDal.Update(user);
-            return new SuccessResult(Messages.UserUpdated);
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(x => x.Id == id));
         }
     }
 }

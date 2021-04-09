@@ -21,6 +21,23 @@ namespace WepAPI.Controllers
             _userService = userService;
         }
 
+        [HttpGet("getbymail")]
+        public IActionResult GetByMail(string email)
+        {
+            _userService.GetByMail(email);
+
+            return Ok();
+
+        }
+        [HttpPost("add")]
+        public IActionResult Add(User user)
+        {
+
+            _userService.Add(user);
+            return Ok(user);
+
+        }
+
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
@@ -29,42 +46,15 @@ namespace WepAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result);
+
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int userId)
+
+        [HttpGet("getusersbyid")]
+        public IActionResult GetCarsByBrandIdDetail(int id)
         {
-            var result = _userService.GetById(userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("add")]
-        public IActionResult Add(User user)
-        {
-            var result = _userService.Add(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
-        {
-            var result = _userService.Delete(user);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpPost("update")]
-        public IActionResult Update(User user)
-        {
-            var result = _userService.Update(user);
+            var result = _userService.GetUsersById(id);
             if (result.Success)
             {
                 return Ok(result);

@@ -17,5 +17,6 @@ namespace Entities.DTOs
         public string ModelYear { get; set; }
         public string ImagePath { get; set; }
         public DateTime Date { get; set; }
+        public int FindexPoint { get; set; }
     }
 }

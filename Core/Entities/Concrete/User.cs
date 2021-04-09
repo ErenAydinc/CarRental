@@ -14,5 +14,6 @@ namespace Core.Entites.Concrete
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public bool Status { get; set; }
+        public int FindexPoint { get; set; }
     }
 }
